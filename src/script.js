@@ -23,7 +23,7 @@ function buildTable(data) {
       color = "text-green-500";
     }
 
-    var row = `<tr class="bg-white w-200 h-15">
+    var row = `<tr class="bg-white w-200 h-15  hover:scale-110 transition-all">
                         <td class="rounded-l-full text-left px-5">${data[i].task}</td>
                         <td class="text-center ${color}">${data[i].Priority}</td>
                         <td class="text-center">${data[i].Status}</td>
@@ -41,6 +41,7 @@ function buildTable(data) {
 const btnAdd = document.getElementById("btn_add");
 const btnSubmit = document.getElementById("btn_submit");
 const btnClose = document.getElementById("btn_close");
+const btnCancel = document.getElementById("btn_cancel");
 
 btnSubmit.addEventListener("click", function () {
 
@@ -67,11 +68,10 @@ btnSubmit.addEventListener("click", function () {
         task[editIndex].Priority = selectedPriority;
         task[editIndex].Status = selectedStatus;
         btnSubmit.textContent = "Add";
-
     }
 
-
-    document.getElementById("card").classList.add("hidden");
+    
+    document.getElementById("overlay").classList.add("hidden");
     clearForm();
     document.getElementById("table-body").innerHTML = "";
     buildTable(task);
@@ -83,14 +83,21 @@ btnSubmit.addEventListener("click", function () {
 //close form and clear 
 
 btnClose.addEventListener("click", function () {
-  document.getElementById("card").classList.add("hidden");
+  document.getElementById("overlay").classList.add("hidden");
+  clearForm();
+});
+
+btnCancel.addEventListener("click", function () {
+  document.getElementById("overlay").classList.add("hidden");
   clearForm();
 });
 
 
 // show form
 btnAdd.addEventListener("click", function () {
-  document.getElementById("card").classList.remove("hidden");
+  btnSubmit.textContent = "Add";
+  document.getElementById("overlay").classList.remove("hidden");
+  document.getElementById("btn_cancel").classList.add("hidden");
 });
 
 function btn_edit(i) {
@@ -98,13 +105,16 @@ function btn_edit(i) {
     clearForm();
     editIndex = i;
 
-    document.getElementById("card").classList.remove("hidden");
+    document.getElementById("overlay").classList.remove("hidden");
     document.getElementById("btn_submit").textContent = "Update";
     document.getElementById("ftaskname").value = task[i].task;
     document.querySelector(`input[name="priority_radio"][value="${task[i].Priority}"]`).checked = true;
         document.querySelector(`input[name="status_radio"][value="${task[i].Status}"]`).checked = true;
 
     btnSubmit.textContent = "Update";
+    document.getElementById("btn_cancel").classList.remove("hidden");
+
+
 
 }
 

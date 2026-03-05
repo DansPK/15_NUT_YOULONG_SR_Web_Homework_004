@@ -13,11 +13,11 @@
 
 
 </head>
-  <body class="font-display bg-gray-900 ">
+  <body class="font-display bg-cyan-200 ">
     <div class="w-full h-200 flex flex-col justify-center items-center">
       <!-- button part -->
       <div class="flex flex-row justify-between items-center h-30 w-200">
-        <div class="font-bold text-3xl text-white">Task List</div>
+        <div class="font-extrabold text-3xl ">Task List</div>
         <div>
           <button
             id="btn_add"
@@ -28,12 +28,12 @@
       </div>
 
       <table class="w-200 border-separate border-spacing-y-3 font-semibold">
-        <thead class="  bg-white h-15 text-[23px] shadow-2xl  rounded-4xl hover:scale-110 transition-all hover:shadow-xl hover:shadow-red-400">
+        <thead class="  bg-white h-15 text-[23px] shadow-md rounded-2xl hover:scale-110 transition-all ">
           <tr class>
-            <th class="rounded-l-full text-left px-5">Task</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th class="rounded-r-full">Actions</th>
+            <th class="rounded-l-3xl text-left px-5 text-cyan-300">Task</th>
+            <th class="text-cyan-300">Priority</th>
+            <th class="text-cyan-300">Status</th>
+            <th class="rounded-r-3xl">Actions</th>
           </tr>
         </thead>
         <tbody id="table-body"></tbody>
@@ -60,7 +60,7 @@
             required
             name="ftaskname"
             id="ftaskname"
-            class="w-100 h-20 border border-red-400 rounded-[10px] mt-3 px-2 py-1 mb-3" />
+            class="w-100 h-40 border border-red-400 rounded-[10px] mt-3 px-2 py-1 mb-3 text-2xl" />
 
 
             <!-- start priority -->
@@ -122,7 +122,7 @@
             <div class="flex justify-end items-center w-full gap-5 mt-2">
               <button id="btn_cancel" type="button" class=" hidden bg-red-500 text-white font-bold w-20 h-10 rounded-[9px] hover:bg-red-600 hover:scale-110 transition-all">Cancel</button>
 
-              <button id="btn_submit" type="button" class="bg-green-500 text-white font-bold w-20 h-10 rounded-[9px] hover:bg-green-600 hover:scale-110 transition-all">Add</button>
+              <button id="btn_submit" type="submit" class="bg-green-500 text-white font-bold w-20 h-10 rounded-[9px] hover:bg-green-600 hover:scale-110 transition-all">Add</button>
             </div>
 
 
@@ -130,13 +130,54 @@
           </form>
         </div>
 
-      <!-- end add card -->
+
+  <!-- end add card -->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
 
     </div>
 
 
 
+        <!-- Start confirm card -->
 
+    <div class="flex justify-center items-center fixed inset-0 w-screen h-screen bg-gray-950/70 hidden " id="overlay-confirm">
+            <div id="card_confirm" class="w-70 h-50 bg-white flex flex-col justify-between items-center p-5 rounded-2xl shadow-xl hover:shadow-gray-500">
+                <div class="text-2xl font-semibold">Are you sure?</div>
+                <div class="text-red-500 text-4xl">
+                  
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+
+                </div>
+                <div class="flex justify-center items-center w-full gap-5 ">
+
+                  <button id="btn_no" class="bg-red-500 w-15 h-10 rounded-2xl text-white hover:bg-red-700 ">
+                    No 
+                  </button>
+
+                  <button id="btn_yes" class="bg-green-500 rounded-2xl w-15 h-10 text-white hover:bg-green-700">
+                    Yes 
+                  </button>
+
+                </div>
+              </div>
+        </div>
+
+
+
+        <!-- end confirm card -->
 
 
     <script src="./src/script.js"></script>

@@ -1,19 +1,19 @@
 let editIndex = -1;
 
 
-var task = [
-  { task: "Korean Homework", Priority: "High", Status: "Progress" },
+let task = [
+  { task: "Korean Homework", Priority: "Low", Status: "Progress" },
   { task: "Java Homework", Priority: "Medium", Status: "Progress" },
-  { task: "Web Homework", Priority: "Low", Status: "Progress" },
+  { task: "Web Homework", Priority: "High", Status: "Progress" },
 ];
 
 buildTable(task);
 
 function buildTable(data) {
-  var table = document.getElementById("table-body");
+  let table = document.getElementById("table-body");
 
-  for (var i = 0; i < data.length; i++) {
-    var priority = data[i].Priority;
+  for (let i = 0; i < data.length; i++) {
+    let priority = data[i].Priority;
 
     if (priority === "High") {
       color = "text-red-500";
@@ -23,11 +23,11 @@ function buildTable(data) {
       color = "text-green-500";
     }
 
-    var row = `<tr class="bg-white w-200 h-15  hover:scale-110 transition-all">
-                        <td class="rounded-l-full text-left px-5">${data[i].task}</td>
+    let row = `<tr class="bg-white w-200 h-18  hover:scale-110 transition-all">
+                        <td class="rounded-tl-2xl text-left px-5">${data[i].task}</td>
                         <td class="text-center ${color}">${data[i].Priority}</td>
                         <td class="text-center">${data[i].Status}</td>
-                        <td class="rounded-r-full text-center">
+                        <td class="rounded-bl-2xl text-center">
                             <button onclick="btn_edit(${i})" class="cursor-pointer text-3xl text-yellow-600"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="btn_delete(${i})" class="cursor-pointer text-3xl text-red-600"><i class="fa-solid fa-trash"></i></button>
                         </td>
                         
@@ -42,16 +42,20 @@ const btnAdd = document.getElementById("btn_add");
 const btnSubmit = document.getElementById("btn_submit");
 const btnClose = document.getElementById("btn_close");
 const btnCancel = document.getElementById("btn_cancel");
+const btn_yes = document.getElementById("btn_yes");
+const btn_no = document.getElementById("btn_no");
+
+
 
 btnSubmit.addEventListener("click", function () {
 
     //get value from element
 
-    var taskval = document.getElementById("ftaskname").value;
-    var selectedPriority = document.querySelector(
+    let taskval = document.getElementById("ftaskname").value;
+    let selectedPriority = document.querySelector(
         'input[name="priority_radio"]:checked',
     ).value;
-    var selectedStatus = document.querySelector(
+    let selectedStatus = document.querySelector(
         'input[name="status_radio"]:checked',
     ).value;
 
@@ -63,6 +67,8 @@ btnSubmit.addEventListener("click", function () {
                 Status: selectedStatus,
             });
     }
+
+    // update
     else {
         task[editIndex].task = taskval;
         task[editIndex].Priority = selectedPriority;
@@ -73,6 +79,8 @@ btnSubmit.addEventListener("click", function () {
     
     document.getElementById("overlay").classList.add("hidden");
     clearForm();
+
+    //clear table
     document.getElementById("table-body").innerHTML = "";
     buildTable(task);
     
@@ -122,13 +130,31 @@ function btn_edit(i) {
 
 function btn_delete(i) {
 
-    //remove 1 item from the index
-    task.splice(i, 1);
+  document.getElementById("overlay-confirm").classList.remove("hidden");
+  
+  return i;
 
-    document.getElementById("table-body").innerHTML = "";
-    buildTable(task);
+
 }
 
+btn_no.addEventListener("click", function(){
+
+  document.getElementById("overlay-confirm").classList.add("hidden");
+
+
+})
+
+btn_yes.addEventListener("click", function (){
+
+    //remove 1 item from the index
+    task.splice(btn_delete(), 1);
+
+     document.getElementById("overlay-confirm").classList.add("hidden");
+    document.getElementById("table-body").innerHTML = "";
+    buildTable(task);
+
+  
+})
 
 function clearForm(){
 
